@@ -1,0 +1,83 @@
+/* Initial config */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--black);
+}
+
+li, ul, a{
+    list-style: none;
+    text-decoration: none;
+    color: var(--black);
+}
+
+:root{
+    /* Pink theme */
+    --pink--light:#FFF5FC;
+
+    /* Dark theme */
+    --white: #FFFFFF;
+    --black: #1F1F1F;
+    --black--light: #A5A5A5;
+    --black--light--light: #E5E5E5;
+    --black--light--dark:#787878;
+}
+
+/* Text config */
+
+.title{
+/* For big titles, like my name. */
+
+font-family: 'Poppins';
+font-weight: 600;
+font-size: 82px;
+line-height: 123px;
+letter-spacing: -0.06em;
+}
+
+.title--header{
+/* This is a font for the header. */
+
+font-family: 'Poppins';
+font-weight: 600;
+font-size: 24px;
+line-height: 36px;
+letter-spacing: -0.06em;
+
+}
+
+
+/* Config classes */
+
+.hidden{
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* Header section */
+
+.header__row{
+    display: flex;
+
+    justify-content: center;
+}
+
+.header__row__text{
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    background-color: var(--black--light);
+    border-radius: 50px;
+}
+
+.header__row__text a:hover {
+    background-color: var(--white);
+    border-radius: 50px;
+}
