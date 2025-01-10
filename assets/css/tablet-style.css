@@ -1,0 +1,24 @@
+@media (max-width: 1134px) and (max-height: 745px) {
+    .header__row{
+        flex-direction: row;
+        position: relative;
+        justify-content: center;
+        
+        margin-top: 10dvh;
+        left: 0;
+    }
+
+    .header__row__background{
+        min-height: clamp(50px, 36px + 10dvh, 99px);
+        min-width: clamp(500px, 36px + 70dvw, 749px);
+    }
+
+    .header__row__text{
+        flex-direction: row;
+    }
+
+    .header__row__color-change{
+        position: absolute;
+        opacity: 0;
+    }
+}
