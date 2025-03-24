@@ -5,32 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Index</title>
 
-    <link rel="stylesheet" href="/assets/css/stylesheet.css">
-    <link rel="stylesheet" href="/assets/css/tablet-style.css">
+    <link rel="stylesheet" href="css/stylesheet.css" />
+    <link rel="stylesheet" href="css/stylesheet-small.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Poppins"
+    />
   </head>
   <body>
-    <div class="loader title">Cargando...</div>
-    
-    <header class="header__row">
-        
-        <nav class="header__row__text">
-          <div class="header__row__background"></div>  
-          <a href="">Sobre mi</a>
-          <a href="">Habilidades</a>
-          <a href="">Formación</a>
-          <a href="">Portafolio</a>
-          <a href="">Contacto </a> 
-        </nav>
+    <div id="loader" class="title">Cargando...</div>
 
-        <div class="header__row__color-change">
+    <header class="header__row">
+      <nav class="header__row__text">
+        <div class="header__row__background"></div>
+        <a class="title--header" href="">Sobre mi</a>
+        <a class="title--header" href="">Habilidades</a>
+        <a class="title--header" href="">Formación</a>
+        <a class="title--header" href="">Portafolio</a>
+        <a class="title--header" href="">Contacto </a>
+      </nav>
+
+      <div id="header__color" class="header__row__color-change">
+        <div id="menu__color-change">
+          <div class="menu__arrow"></div>
+        </div>
+          <div id="color-change">
           <a class="color-change" id="version--dark--trigger"></a>
           <a class="color-change" id="version--white--trigger"></a>
           <a class="color-change" id="version--pink--trigger"></a>
         </div>
-
+      </div>
     </header>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script type="module" src="assets/js/main.js"></script>
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>
