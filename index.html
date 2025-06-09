@@ -17,6 +17,7 @@
     <div id="loader" class="title">Cargando...</div>
 
     <header class="header__row">
+      <div id="menu__header"></div>
       <nav class="header__row__text">
         <div class="header__row__background"></div>
         <a class="title--header" href="">Sobre mi</a>
@@ -27,10 +28,11 @@
       </nav>
 
       <div id="header__color" class="header__row__color-change">
-        <div id="menu__color-change">
+        <div id="menu__color-change" class="hidden">
           <div class="menu__arrow"></div>
         </div>
-          <div id="color-change">
+
+        <div id="color-change">
           <a class="color-change" id="version--dark--trigger"></a>
           <a class="color-change" id="version--white--trigger"></a>
           <a class="color-change" id="version--pink--trigger"></a>
@@ -39,5 +41,7 @@
     </header>
 
     <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/main-small.js"></script>
+    <script type="module" src="js/animation.js"></script>
   </body>
 </html>

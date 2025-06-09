@@ -1,21 +1,36 @@
-/* Animation function */
+export { elementID, addClass, removeClass, addAnimation, addStyle } //Functions
+export { headerColor } // Const
 
+//IDs
+const headerColor = elementID('header__color');
+
+/* Functions */
+//Style function
+function addStyle(element, addStyle, property) {
+    element.style[addStyle] = property
+}
+
+//Animation function
 function addAnimation(element, animation, duration) {
     if (animation) {
-        element.style.animation = `${animation} ${duration}`;
+        addStyle(element, 'animation', `${animation} ${duration}`)
     }
 }
 
-/* Loader */
+//Add and remove class function
 
-window.onload = async () => {
-    const loader = document.getElementById('loader');
+function addClass(element, elemenetClass) {
+    element.classList.add(`${elemenetClass}`);
+}
 
-    addAnimation(loader, 'fadeOut', '2s');
+function removeClass(element, elemenetClass) {
+    element.classList.remove(`${elemenetClass}`)
+}
 
-    setTimeout(() => {
-        loader.style.visibility = 'hidden';
-    }, 2000);
+// Object by ID funtion 
+
+function elementID(id) {
+    return document.getElementById(id)
 }
 
 /* Change color function */
@@ -27,35 +42,29 @@ function changeTheme(theme) {
     }
 }
 
-document.getElementById('version--pink--trigger').onclick = () => {
+/* Loader */
+
+window.onload = async () => {
+    const loader = elementID('loader');
+
+    addAnimation(loader, 'fadeOut', '2s');
+
+    setTimeout(() => {
+        addStyle(loader, 'visibility', 'hidden')
+    }, 2000);
+}
+
+
+
+elementID('version--pink--trigger').onclick = () => {
     changeTheme('version--pink')
 }
-document.getElementById('version--white--trigger').onclick = () => {
+elementID('version--white--trigger').onclick = () => {
     changeTheme('version--white')
 }
-document.getElementById('version--dark--trigger').onclick = () => {
+elementID('version--dark--trigger').onclick = () => {
     changeTheme()
 }
 
-/* Menu display function */
 
-const headerColor = document.getElementById('header__color');
-
-document.addEventListener('click', function (event) {
-    if (event.target.closest('#menu__color-change') && (headerColor.style.right != '0px')) {
-        addAnimation(headerColor, 'displayMenu', '1s');
-
-        setTimeout(() => {
-            headerColor.style.right = '0px'
-        }, 1000);
-
-
-    } else if (!event.target.closest('#color-change')) {
-        addAnimation(headerColor, 'closeMenu', '1s');
-
-        setTimeout(() => {
-            headerColor.style.removeProperty('right');
-        }, 1000);
-    }
-})
 
