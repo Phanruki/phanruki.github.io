@@ -19,12 +19,16 @@ function addAnimation(element, animation, duration) {
 
 //Add and remove class function
 
-function addClass(element, elemenetClass) {
-    element.classList.add(`${elemenetClass}`);
+function addClass(element, elementClass) {
+    console.log(element)
+    console.log(elementClass)
+    console.log(`${elementClass}`)
+
+    element.classList.add(`${elementClass}`);
 }
 
-function removeClass(element, elemenetClass) {
-    element.classList.remove(`${elemenetClass}`)
+function removeClass(element, elementClass) {
+    element.classList.remove(`${elementClass}`)
 }
 
 // Object by ID funtion 
@@ -36,6 +40,7 @@ function elementID(id) {
 /* Change color function */
 
 function changeTheme(theme) {
+    console.log(`{theme}`)
     document.body.removeAttribute('class')
     if (theme) {
         document.body.classList.add(theme)
