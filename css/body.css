@@ -1,0 +1,27 @@
+.container__main{
+display: flex;
+position: fixed;
+
+    width: 34dvw;
+    height: 86dvh;
+
+    top: 50%;
+    left: 8%;
+    transform: translate(0%,-50%);
+
+    background-color: var(--black--light);
+}
+
+.container__sub{
+    display: flex;
+    position: fixed;
+    
+        width: 52dvw;
+        height: 86dvh;
+    
+        top: 50%;
+        right: 6%;
+        transform: translate(0%, -50%);
+    
+        background-color: var(--black--light--dark);
+    }

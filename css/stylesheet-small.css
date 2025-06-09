@@ -17,8 +17,8 @@
       gap: 2dvw;
 
       > .header__row__background {
-        min-height: clamp(50px, 12px + 10dvh, 99px);
-        min-width: clamp(0px, 85dvw + 24px, 749px);
+        min-height: clamp(30px, 8dvh, 99px);
+        min-width: clamp(300px, 85dvw, 749px);
 
         border-radius: 50px;
       }
@@ -28,7 +28,7 @@
       position: fixed;
       flex-direction: row;
 
-      top: 15dvh;
+      top: 18dvh;
       right: clamp(-54px, -24.9091px - 2.8409vw, -34px);
 
       > #color-change {
