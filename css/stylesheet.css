@@ -104,7 +104,6 @@ body.version--white {
 
   left: -140px;
 
-  /* left: clamp(30px, 5dvw, 50px); */
   gap: clamp(10px, 5dvh, 50px);
 
   > .header__row__text {
