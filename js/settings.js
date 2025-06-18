@@ -53,7 +53,7 @@ document.addEventListener('click', (event) => {
             addStyle(headerColor, 'right', '0px')
         }, 1000);
 
-    } else if (!event.target.closest('#color-change')) {
+    } else if (!event.target.closest('#color-change') && (headerColor.style.right === '0px')) {
         animationCreator(headerColor, keys(closeMenu, 0), keys(closeMenu, 0), closeMenu.right,
             closeMenu.rightEnd, closeMenu.duration)
 
@@ -63,27 +63,27 @@ document.addEventListener('click', (event) => {
     }
 })
 
-document.addEventListener('click', (event) => {
-    if (event.target.closest('#menu__header') && (headerRow.style.left != 'clamp(30px, 5dvw, 50px)')) {
+if (!sizeWindow.matches) {
+    document.addEventListener('click', (event) => {
+        if (event.target.closest('#menu__header') && (headerRow.style.left != 'clamp(30px, 5dvw, 50px)')) {
 
-        animationCreator(headerRow, '', 'left', '', 'clamp(30px, 5dvw, 50px)', displayMenu.duration)
-        setTimeout(() => {
-            addStyle(headerRow, 'left', 'clamp(30px, 5dvw, 50px)')
-        }, 1000);
+            animationCreator(headerRow, '', 'left', '', 'clamp(30px, 5dvw, 50px)', displayMenu.duration)
+            setTimeout(() => {
+                addStyle(headerRow, 'left', 'clamp(30px, 5dvw, 50px)')
+            }, 1000);
 
-        addClass(containerBody, 'hidden')
+            addClass(containerBody, 'hidden')
 
-    } else if (!event.target.closest('#menu__header')) {
+        } else if (!event.target.closest('#menu__header')) {
 
-        removeClass(containerBody, 'hidden')
+            removeClass(containerBody, 'hidden')
 
-        animationCreator(headerRow, '', 'left', '',
-            '-140px', closeMenu.duration)
+            animationCreator(headerRow, '', 'left', '',
+                '-140px', closeMenu.duration)
 
-        setTimeout(() => {
-            addStyle(headerRow, 'left', '-140px')
-        }, 1000);
-    }
-})
-
-
+            setTimeout(() => {
+                addStyle(headerRow, 'left', '-140px')
+            }, 1000);
+        }
+    })
+}

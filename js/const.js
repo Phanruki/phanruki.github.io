@@ -6,7 +6,7 @@ import { elementID } from "./functions.js";
 const loader = elementID('loader');
 
 //Display
-const sizeWindow = window.matchMedia("(max-width: 1134px) and (max-height: 745px)");
+const sizeWindow = window.matchMedia("(max-width: 1134px) and (max-height: 934px)");
 
 /* By ID */
 //Small display
