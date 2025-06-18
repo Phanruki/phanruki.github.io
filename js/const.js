@@ -1,4 +1,4 @@
-export { fadeOut, displayMenu, closeMenu, menuColor, menuHeader, containerBody, sizeWindow, loader, headerColor, headerRow }
+export { fadeOut, displayMenu, closeMenu, menuColor, menuHeader, containerBody, containerMain, containerSub, sizeWindow, loader, headerColor, headerRow, closeContainerSub, closeContainerMain }
 import { elementID } from "./functions.js";
 
 /* Settings */
@@ -19,6 +19,8 @@ const menuColor = elementID('menu__color-change')
 const headerRow = elementID('header__row')
 const menuHeader = elementID('menu__header')
 const containerBody = elementID('container__body')
+const containerMain = elementID('container__main')
+const containerSub = elementID('container__sub')
 
 
 /* Keyframes */
@@ -31,6 +33,22 @@ const displayMenu = {
 const closeMenu = {
     'right': '0%',
     'rightEnd': 'clamp(-54px, -24.9091px - 2.8409vw, -34px)',
+    'duration': 1000
+}
+
+const closeContainerSub = {
+    'right': '6%',
+    'rightEnd': '50%',
+    'transform': 'translate(0%, -50%)',
+    'transformEnd': 'translate(50%, -50%)',
+    'duration': 1000
+}
+
+const closeContainerMain = {
+    'left': '20%',
+    'leftEnd': '50%',
+    'transform': 'translate(0%, -50%)',
+    'transformEnd': 'translate(-50%, -50%)',
     'duration': 1000
 }
 

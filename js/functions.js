@@ -1,4 +1,4 @@
-export { display, displayNormal, keys, animationCreator, addStyle, addClass, elementID, changeTheme, removeClass }
+export { display, displayNormal, keys, animationCreator, animationCreatorTwo, addStyle, addClass, elementID, changeTheme, removeClass }
 
 //Style function
 function addStyle(element, addStyle, property) {
@@ -46,6 +46,17 @@ function animationCreator(element, propertyOne, propertyTwo, start, end, duratio
     element.animate([
         { [propertyOne]: `${start}` },
         { [propertyTwo]: `${end}` }], {
+        'duration': duration
+    })
+}
+
+function animationCreatorTwo(element, propertyOne, propertyTwo, propertyThree, propertyFour, startOne, startTwo, endOne, endTwo, duration) {
+    console.log(startOne)
+    element.animate([
+        { [propertyOne]: `${startOne}` },
+        { [propertyTwo]: `${startTwo}` },
+        { [propertyThree]: `${endOne}` },
+        { [propertyFour]: `${endTwo}` }], {
         'duration': duration
     })
 }

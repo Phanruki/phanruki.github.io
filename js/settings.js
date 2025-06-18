@@ -1,5 +1,5 @@
-import { elementID, addStyle, animationCreator, keys, changeTheme, display, displayNormal, addClass, removeClass } from "./functions.js";
-import { fadeOut, loader, headerColor, displayMenu, closeMenu, menuColor, menuHeader, containerBody, sizeWindow, headerRow } from "./const.js";
+import { elementID, addStyle, animationCreator, keys, changeTheme, display, displayNormal, addClass, removeClass, animationCreatorTwo } from "./functions.js";
+import { fadeOut, loader, headerColor, displayMenu, closeMenu, menuColor, menuHeader, containerBody, sizeWindow, headerRow, containerSub, containerMain, closeContainerMain } from "./const.js";
 
 
 /* General */
@@ -72,11 +72,14 @@ if (!sizeWindow.matches) {
                 addStyle(headerRow, 'left', 'clamp(30px, 5dvw, 50px)')
             }, 1000);
 
-            addClass(containerBody, 'hidden')
+            animationCreatorTwo(containerMain, keys(closeContainerMain, 0), keys(closeContainerMain, 1), keys(closeContainerMain, 0), keys(closeContainerMain, 1), closeContainerMain.left, closeContainerMain.transform, closeContainerMain.leftEnd, closeContainerMain.transformEnd, closeContainerMain.duration)
+            addStyle(containerMain, 'left', '50%')
+            addStyle(containerMain, 'transform', 'translate(-50%, -50%)')
 
-        } else if (!event.target.closest('#menu__header')) {
+            animationCreator(containerSub, keys(fadeOut, 0), keys(fadeOut, 0), fadeOut.opacity, fadeOut.opacityEnd, fadeOut.duration)
+            addClass(containerSub, 'hidden')
 
-            removeClass(containerBody, 'hidden')
+        } else if (!event.target.closest('#menu__header') && (headerRow.style.left === 'clamp(30px, 5dvw, 50px)')) {
 
             animationCreator(headerRow, '', 'left', '',
                 '-140px', closeMenu.duration)
@@ -84,6 +87,12 @@ if (!sizeWindow.matches) {
             setTimeout(() => {
                 addStyle(headerRow, 'left', '-140px')
             }, 1000);
+
+            animationCreatorTwo(containerMain, keys(closeContainerMain, 0), keys(closeContainerMain, 1), keys(closeContainerMain, 0), keys(closeContainerMain, 1), closeContainerMain.leftEnd, closeContainerMain.transformEnd, closeContainerMain.left, closeContainerMain.transform, closeContainerMain.duration)
+            containerMain.style = ''
+
+            animationCreator(containerSub, keys(fadeOut, 0), keys(fadeOut, 0), fadeOut.opacityEnd, fadeOut.opacity, fadeOut.duration)
+            removeClass(containerSub, 'hidden')
         }
     })
 }
