@@ -43,14 +43,14 @@ body.version--white {
 }
 
 /* Text config */
+/* Minimum in clamp is 42% of max */
 
 .title {
   /* For big titles, like my name. */
 
   font-family: "Poppins";
   font-weight: 600;
-  font-size: 82px;
-  line-height: 123px;
+  font-size: clamp(36px, 8dvh, 82px);
   letter-spacing: -0.06em;
 }
 
@@ -63,6 +63,28 @@ body.version--white {
   line-height: 36px;
   letter-spacing: -0.06em;
   padding: 1%;
+}
+
+.title--sub {
+  /* Its the subtitle for title. */
+
+  font-family: "Pridi";
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(26px, 6dvh, 62px);
+  letter-spacing: -0.06em;
+}
+
+.title--sub--sub {
+  /* It's the second and final subtitle. */
+
+  font-family: "Pridi";
+  font-style: normal;
+  font-weight: 600;
+  font-size: clamp(14px, 3dvh, 32px);
+  letter-spacing: -0.06em;
+
+  text-align: center;
 }
 
 /* Config classes */
@@ -88,6 +110,13 @@ body.version--white {
 
   background-color: var(--black);
   color: var(--white);
+}
+
+.button {
+  background-color: var(--button-color);
+
+  padding: 1% 5%;
+  border-radius: 15px;
 }
 
 /* Header section */
@@ -124,7 +153,7 @@ body.version--white {
       min-height: clamp(450px, 36px + 70dvh, 700px);
       min-width: 150px;
 
-      border-radius: 15px;
+      border-radius: 12px;
 
       z-index: -1;
       background-color: var(--black--light);
@@ -134,7 +163,6 @@ body.version--white {
 
 .header__row__color-change {
   display: flex;
-  flex-direction: row;
 
   #color-change {
     flex-direction: row;
@@ -182,6 +210,8 @@ body.version--white {
   height: clamp(30px, 20.9091px + 2.8409vw, 50px);
 
   background-color: var(--black--light);
+
+  border-radius: 14px 0px 0px 14px;
 }
 
 .menu__arrow {
@@ -204,4 +234,60 @@ body.version--white {
 
   transform: rotate(180deg);
   left: 140px;
+}
+
+/* Body */
+
+.container__main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > .container__main__titles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-bottom: clamp(10px, 4dvh, 44px);
+  }
+
+  > .container__main__social-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 20px;
+
+    padding-bottom: clamp(10px, 4dvh, 60px);
+
+    .social-icon {
+      background-image: var(--icon-url);
+      background-size: contain;
+      background-repeat: no-repeat;
+
+      min-height: clamp(20px, 10.9091px + 2.8409vw, 40px);
+      min-width: clamp(20px, 10.9091px + 2.8409vw, 40px);
+    }
+  }
+
+  > .container__main__buttons {
+    display: flex;
+    flex-direction: row;
+
+    width: -webkit-fill-available;
+
+    justify-content: center;
+    gap: 38px;
+
+    padding-bottom: clamp(10px, 4dvh, 40px);
+  }
+}
+
+.main__profile-photo {
+  display: flex;
+
+  width: clamp(200px, 36dvh, 430px);
+
+  padding-top: clamp(10px, 7dvh, 100px);
 }

@@ -1,5 +1,5 @@
-@media (max-width: 1134px) and (max-height: 745px) {
-  .header__row {
+@media (max-width: 1134px) and (max-height: 934px) {
+  #header__row {
     flex-direction: row;
     position: relative;
     justify-content: center;
@@ -29,7 +29,7 @@
       flex-direction: row;
 
       top: 18dvh;
-      right: clamp(-54px, -24.9091px - 2.8409vw, -34px);
+      right: clamp(-58px, -28px - 2.8409vw, -34px);
 
       > #color-change {
         background-color: var(--black--light);
