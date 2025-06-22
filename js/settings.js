@@ -53,10 +53,8 @@ document.addEventListener('click', (event) => {
     } else if (!event.target.closest('#color-change')) {
         animateElement(headerColor, 'menu.closeColorChange')
     }
-})
 
-if (!sizeWindow.matches) {
-    document.addEventListener('click', (event) => {
+    if (!sizeWindow.matches) {
         if (event.target.closest('#menu__header')) {
             animateElement(headerRow, 'menu.openHeaderRow')
             animateElement(containerMain, 'menu.openContainerMain')
@@ -67,5 +65,6 @@ if (!sizeWindow.matches) {
             animateElement(containerMain, 'menu.closeContainerMain')
             animateElement(containerSub, 'menu.openContainerSub')
         }
-    })
-}
+    }
+})
+
