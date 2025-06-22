@@ -72,7 +72,7 @@ function generateKeyframe(properties, values) {
 /* Functions for responsive display */
 
 // Debounce function
-function debounce(func, wait = 250, immediate = false) {
+function debounce(func, wait = 500, immediate = false) {
     let timeout;
     return function executedFunction(...args) {
         const context = this;
@@ -107,4 +107,4 @@ export const handleResponsiveChanges = debounce((mediaQuery) => {
     toggleResponsiveDisplay(mediaQuery, ELEMENTS.menu.header, 'menu', true);
     //Display body
     toggleResponsiveDisplay(mediaQuery, ELEMENTS.container.body, null, true);
-}, 250);
+}, 500);

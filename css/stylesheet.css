@@ -100,7 +100,7 @@ body.version--white {
 #loader {
   display: flex;
   position: fixed;
-  z-index: 1;
+  z-index: 99;
 
   justify-content: center;
   align-items: center;
