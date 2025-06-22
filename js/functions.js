@@ -1,84 +1,84 @@
-export { display, displayNormal, keys, animationCreator, animationCreatorTwo, addStyle, addClass, elementID, changeTheme, removeClass }
-
-//Style function
-function addStyle(element, addStyle, property) {
-    element.style[addStyle] = property
-}
-
-// Object by ID function 
-function elementID(id) {
-    return document.getElementById(id)
-}
+export { changeTheme }
+import { keyframes, THEMES } from "./const.js";
+import { DOM } from "./dom.js";
 
 // Change color function
-function changeTheme(theme) {
-    document.body.removeAttribute('class')
-    if (theme) {
-        document.body.classList.add(theme)
+function changeTheme(themeKey) {
+    document.body.className = '';
+
+    if (THEMES[themeKey]) {
+        document.body.classList.add(THEMES[themeKey]);
     }
-}
-
-//Add and remove class functions
-function addClass(element, elementClass) {
-    element.classList.add(`${elementClass}`);
-}
-
-function removeClass(element, elementClass) {
-    element.classList.remove(`${elementClass}`)
 }
 
 /* Functions for animations */
 
-//Keys in objetcts function
-function keys(object, i) {
-    let keyObject
+//Animation Function
+export function animateElement(element, presetPath, overrides = {}) {
+    // Split preset path (e.g., 'menu.openColorChange' -> ['menu', 'openColorChange'])
+    const pathParts = presetPath.split('.');
+    let preset = keyframes;
 
-    Object.keys(object).forEach((key, j) => {
-        if (j == i) {
-            keyObject = key
+    // Traverse the preset path
+    for (const part of pathParts) {
+        preset = preset[part];
+        if (!preset) {
+            console.error(`Preset "${presetPath}" not found`);
+            return null;
         }
-    })
-    return keyObject;
+    }
+
+    // Merge preset with overrides
+    const config = { ...preset, ...overrides };
+    const { properties, values, duration, easing = 'ease-in-out', fill = 'forwards' } = config;
+
+    // Fallback: Compute current styles for ALL properties if `values.start` is missing
+    const startValues = values.start ?? properties.map(prop => getComputedStyle(element)[prop]);
+    const endValues = values.end;
+
+    // Generate keyframes
+    const animationKeyframes = [
+        generateKeyframe(properties, startValues),
+        generateKeyframe(properties, endValues)
+    ];
+
+    return element.animate(animationKeyframes, { duration, easing, fill });
 }
 
-//Animation function
-function animationCreator(element, propertyOne, propertyTwo, start, end, duration) {
-    element.animate([
-        { [propertyOne]: `${start}` },
-        { [propertyTwo]: `${end}` }], {
-        'duration': duration
-    })
-}
+function generateKeyframe(properties, values) {
+    // Case 1: Single value for all properties (e.g., `values = "0px"` or `0`)
+    if (typeof values !== 'object' || values === null) {
+        return properties.reduce((frame, prop) => {
+            frame[prop] = values;
+            return frame;
+        }, {});
+    }
 
-function animationCreatorTwo(element, propertyOne, propertyTwo, propertyThree, propertyFour, startOne, startTwo, endOne, endTwo, duration) {
-    console.log(startOne)
-    element.animate([
-        { [propertyOne]: `${startOne}` },
-        { [propertyTwo]: `${startTwo}` },
-        { [propertyThree]: `${endOne}` },
-        { [propertyFour]: `${endTwo}` }], {
-        'duration': duration
-    })
-}
+    // Case 2: Array of values (e.g., `values = ["20%", "translate(0%, -50%)"]`)
+    if (Array.isArray(values)) {
+        return properties.reduce((frame, prop, index) => {
+            frame[prop] = values[index];
+            return frame;
+        }, {});
+    }
 
+    // Case 3: Object with per-property values (e.g., `values = { left: "20%", transform: "translateX(0%)" }`)
+    return properties.reduce((frame, prop) => {
+        frame[prop] = values[prop];  // Directly map property names
+        return frame;
+    }, {});
+}
 
 //Functions for display elements matching size window
-function display(sizeWindow, menu, className) {
-    if (sizeWindow.matches) {
-        if (className) addClass(menu, className);
-        removeClass(menu, 'hidden');
-    } else {
-        addClass(menu, 'hidden')
-        if (className) removeClass(menu, className);
-    }
-}
+export function toggleResponsiveDisplay(mediaQuery, element, className = null, invert = false) {
+    const shouldShow = invert ? !mediaQuery.matches : mediaQuery.matches;
 
-function displayNormal(sizeWindow, menu, className) {
-    if (sizeWindow.matches) {
-        addClass(menu, 'hidden')
-        if (className) removeClass(menu, className);
-    } else {
-        if (className) addClass(menu, className);
-        removeClass(menu, 'hidden')
+    // Toggle visibility
+    element.classList.toggle('hidden', !shouldShow);
+
+    // Manage optional class
+    if (className) {
+        const classes = Array.isArray(className) ? className : [className];
+        classes.forEach(cls => element.classList.toggle(cls, shouldShow));
     }
 }

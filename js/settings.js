@@ -1,98 +1,71 @@
-import { elementID, addStyle, animationCreator, keys, changeTheme, display, displayNormal, addClass, removeClass, animationCreatorTwo } from "./functions.js";
-import { fadeOut, loader, headerColor, displayMenu, closeMenu, menuColor, menuHeader, containerBody, sizeWindow, headerRow, containerSub, containerMain, closeContainerMain } from "./const.js";
-
+import { changeTheme, animateElement, toggleResponsiveDisplay } from "./functions.js";
+import { loader, headerColor, menuColor, menuHeader, containerBody, sizeWindow, headerRow, containerSub, containerMain } from "./const.js";
+import { DOM } from "./dom.js";
 
 /* General */
 //Loader
 window.onload = async () => {
 
-    animationCreator(loader, keys(fadeOut, 0), keys(fadeOut, 0), fadeOut.opacity, fadeOut.opacityEnd, fadeOut.duration)
+    animateElement(loader, 'fadeOut')
 
     setTimeout(() => {
-        addStyle(loader, 'visibility', 'hidden')
+        DOM.addStyle(loader, 'visibility', 'hidden')
     }, 2000);
 }
 
 //Change theme  
-elementID('version--pink--trigger').onclick = () => {
-    changeTheme('version--pink')
+DOM.elementID('version--pink--trigger').onclick = () => {
+    changeTheme('pink')
 }
-elementID('version--white--trigger').onclick = () => {
-    changeTheme('version--white')
+DOM.elementID('version--white--trigger').onclick = () => {
+    changeTheme('white')
 }
-elementID('version--dark--trigger').onclick = () => {
-    changeTheme()
+DOM.elementID('version--dark--trigger').onclick = () => {
+    changeTheme('dark')
 }
 
 /* Initial */
 
 //Display menu
-display(sizeWindow, menuColor, 'menu')
-displayNormal(sizeWindow, menuHeader, 'menu')
+toggleResponsiveDisplay(sizeWindow, menuColor, 'menu');
+toggleResponsiveDisplay(sizeWindow, menuHeader, 'menu', true);
 
 //Display body
-displayNormal(sizeWindow, containerBody, '')
+toggleResponsiveDisplay(sizeWindow, containerBody, null, true)
 
 /* Change listener */
 
 sizeWindow.addEventListener("change", function () {
     //Display menu
-    display(sizeWindow, menuColor, 'menu')
-    displayNormal(sizeWindow, menuHeader, 'menu')
+    toggleResponsiveDisplay(sizeWindow, menuColor, 'menu');
+    toggleResponsiveDisplay(sizeWindow, menuHeader, 'menu', true);
 
     //Display body
-    displayNormal(sizeWindow, containerBody, '')
+    toggleResponsiveDisplay(sizeWindow, containerBody, null, true)
 });
 
 /* Menu display function */
 
 document.addEventListener('click', (event) => {
-    if (event.target.closest('#menu__color-change') && (headerColor.style.right != '0px')) {
-        animationCreator(headerColor, '', keys(displayMenu, 0), '', displayMenu.right, displayMenu.duration)
-        setTimeout(() => {
-            addStyle(headerColor, 'right', '0px')
-        }, 1000);
+    if (event.target.closest('#menu__color-change')) {
+        animateElement(headerColor, 'menu.openColorChange')
 
-    } else if (!event.target.closest('#color-change') && (headerColor.style.right === '0px')) {
-        animationCreator(headerColor, keys(closeMenu, 0), keys(closeMenu, 0), closeMenu.right,
-            closeMenu.rightEnd, closeMenu.duration)
-
-        setTimeout(() => {
-            headerColor.style.removeProperty('right');
-        }, 1000);
+    } else if (!event.target.closest('#color-change')) {
+        animateElement(headerColor, 'menu.closeColorChange')
     }
 })
 
 if (!sizeWindow.matches) {
     document.addEventListener('click', (event) => {
-        if (event.target.closest('#menu__header') && (headerRow.style.left != 'clamp(30px, 5dvw, 50px)')) {
+        if (event.target.closest('#menu__header')) {
+            animateElement(headerRow, 'menu.openHeaderRow')
+            animateElement(containerMain, 'menu.openContainerMain')
+            animateElement(containerSub, 'menu.closeContainerSub')
 
-            animationCreator(headerRow, '', 'left', '', 'clamp(30px, 5dvw, 50px)', displayMenu.duration)
-            setTimeout(() => {
-                addStyle(headerRow, 'left', 'clamp(30px, 5dvw, 50px)')
-            }, 1000);
-
-            animationCreatorTwo(containerMain, keys(closeContainerMain, 0), keys(closeContainerMain, 1), keys(closeContainerMain, 0), keys(closeContainerMain, 1), closeContainerMain.left, closeContainerMain.transform, closeContainerMain.leftEnd, closeContainerMain.transformEnd, closeContainerMain.duration)
-            addStyle(containerMain, 'left', '50%')
-            addStyle(containerMain, 'transform', 'translate(-50%, -50%)')
-
-            animationCreator(containerSub, keys(fadeOut, 0), keys(fadeOut, 0), fadeOut.opacity, fadeOut.opacityEnd, fadeOut.duration)
-            addClass(containerSub, 'hidden')
-
-        } else if (!event.target.closest('#menu__header') && (headerRow.style.left === 'clamp(30px, 5dvw, 50px)')) {
-
-            animationCreator(headerRow, '', 'left', '',
-                '-140px', closeMenu.duration)
-
-            setTimeout(() => {
-                addStyle(headerRow, 'left', '-140px')
-            }, 1000);
-
-            animationCreatorTwo(containerMain, keys(closeContainerMain, 0), keys(closeContainerMain, 1), keys(closeContainerMain, 0), keys(closeContainerMain, 1), closeContainerMain.leftEnd, closeContainerMain.transformEnd, closeContainerMain.left, closeContainerMain.transform, closeContainerMain.duration)
-            containerMain.style = ''
-
-            animationCreator(containerSub, keys(fadeOut, 0), keys(fadeOut, 0), fadeOut.opacityEnd, fadeOut.opacity, fadeOut.duration)
-            removeClass(containerSub, 'hidden')
+        } else if (!event.target.closest('#header__row')) {
+            animateElement(headerRow, 'menu.closeHeaderRow')
+            animateElement(containerMain, 'menu.closeContainerMain')
+            animateElement(containerSub, 'menu.openContainerSub')
         }
     })
 }
