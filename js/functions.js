@@ -1,6 +1,5 @@
 export { changeTheme }
-import { keyframes, THEMES } from "./const.js";
-import { DOM } from "./dom.js";
+import { keyframes, ELEMENTS } from "./const.js";
 
 // Change color function
 function changeTheme(themeKey) {
@@ -69,6 +68,25 @@ function generateKeyframe(properties, values) {
     }, {});
 }
 
+
+/* Functions for responsive display */
+
+// Debounce function
+function debounce(func, wait = 250, immediate = false) {
+    let timeout;
+    return function executedFunction(...args) {
+        const context = this;
+        const later = () => {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
+
 //Functions for display elements matching size window
 export function toggleResponsiveDisplay(mediaQuery, element, className = null, invert = false) {
     const shouldShow = invert ? !mediaQuery.matches : mediaQuery.matches;
@@ -82,3 +100,11 @@ export function toggleResponsiveDisplay(mediaQuery, element, className = null, i
         classes.forEach(cls => element.classList.toggle(cls, shouldShow));
     }
 }
+
+export const handleResponsiveChanges = debounce((mediaQuery) => {
+    //Display menu
+    toggleResponsiveDisplay(mediaQuery, ELEMENTS.color.menu, 'menu');
+    toggleResponsiveDisplay(mediaQuery, ELEMENTS.menu.header, 'menu', true);
+    //Display body
+    toggleResponsiveDisplay(mediaQuery, ELEMENTS.container.body, null, true);
+}, 250);

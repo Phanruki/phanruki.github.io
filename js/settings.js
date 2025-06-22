@@ -1,69 +1,49 @@
-import { changeTheme, animateElement, toggleResponsiveDisplay } from "./functions.js";
-import { loader, headerColor, menuColor, menuHeader, containerBody, sizeWindow, headerRow, containerSub, containerMain } from "./const.js";
+import { changeTheme, animateElement, handleResponsiveChanges } from "./functions.js";
+import { ELEMENTS } from "./const.js";
 import { DOM } from "./dom.js";
 
 /* General */
 //Loader
 window.onload = async () => {
-
-    animateElement(loader, 'fadeOut')
-
-    setTimeout(() => {
-        DOM.addStyle(loader, 'visibility', 'hidden')
-    }, 2000);
+    animateElement(ELEMENTS.loader, 'fadeOut').onfinish = () => {
+        DOM.addStyle(loader, 'visibility', 'hidden');
+    };
 }
 
 //Change theme  
-DOM.elementID('version--pink--trigger').onclick = () => {
-    changeTheme('pink')
-}
-DOM.elementID('version--white--trigger').onclick = () => {
-    changeTheme('white')
-}
-DOM.elementID('version--dark--trigger').onclick = () => {
-    changeTheme('dark')
-}
+Object.entries(ELEMENTS.themeTriggers).forEach(([theme, element]) => {
+    element.onclick = () => changeTheme(theme);
+});
+
 
 /* Initial */
 
-//Display menu
-toggleResponsiveDisplay(sizeWindow, menuColor, 'menu');
-toggleResponsiveDisplay(sizeWindow, menuHeader, 'menu', true);
-
-//Display body
-toggleResponsiveDisplay(sizeWindow, containerBody, null, true)
+handleResponsiveChanges(ELEMENTS.sizeWindow);
 
 /* Change listener */
 
-sizeWindow.addEventListener("change", function () {
-    //Display menu
-    toggleResponsiveDisplay(sizeWindow, menuColor, 'menu');
-    toggleResponsiveDisplay(sizeWindow, menuHeader, 'menu', true);
-
-    //Display body
-    toggleResponsiveDisplay(sizeWindow, containerBody, null, true)
-});
+ELEMENTS.sizeWindow.addEventListener("change", () => handleResponsiveChanges(ELEMENTS.sizeWindow));
 
 /* Menu display function */
 
 document.addEventListener('click', (event) => {
     if (event.target.closest('#menu__color-change')) {
-        animateElement(headerColor, 'menu.openColorChange')
+        animateElement(ELEMENTS.color.header, 'menu.open.colorChange')
 
     } else if (!event.target.closest('#color-change')) {
-        animateElement(headerColor, 'menu.closeColorChange')
+        animateElement(ELEMENTS.color.header, 'menu.close.colorChange')
     }
 
-    if (!sizeWindow.matches) {
+    if (!ELEMENTS.sizeWindow.matches) {
         if (event.target.closest('#menu__header')) {
-            animateElement(headerRow, 'menu.openHeaderRow')
-            animateElement(containerMain, 'menu.openContainerMain')
-            animateElement(containerSub, 'menu.closeContainerSub')
+            animateElement(ELEMENTS.menu.row, 'menu.open.headerRow')
+            animateElement(ELEMENTS.container.main, 'menu.open.containerMain')
+            animateElement(ELEMENTS.container.sub, 'menu.close.containerSub')
 
         } else if (!event.target.closest('#header__row')) {
-            animateElement(headerRow, 'menu.closeHeaderRow')
-            animateElement(containerMain, 'menu.closeContainerMain')
-            animateElement(containerSub, 'menu.openContainerSub')
+            animateElement(ELEMENTS.menu.row, 'menu.close.headerRow')
+            animateElement(ELEMENTS.container.main, 'menu.close.containerMain')
+            animateElement(ELEMENTS.container.sub, 'menu.open.containerSub')
         }
     }
 })
