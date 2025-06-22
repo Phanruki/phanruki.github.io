@@ -29,7 +29,7 @@ export const keyframes = {
         close: {
             colorChange: {
                 properties: ['right'],
-                values: { start: '0%', end: 'clamp(-54px, -24.9091px - 2.8409vw, -34px)' },
+                values: { end: 'clamp(-54px, -24.9091px - 2.8409vw, -34px)' },
                 duration: 1000
             },
             headerRow: {

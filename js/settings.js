@@ -26,10 +26,9 @@ ELEMENTS.sizeWindow.addEventListener("change", () => handleResponsiveChanges(ELE
 
 /* Menu display function */
 
-document.body.addEventListener('click', (event) => {
+document.addEventListener('click', (event) => {
     if (event.target.closest('#menu__color-change')) {
         animateElement(ELEMENTS.color.header, 'menu.open.colorChange')
-
     } else if (!event.target.closest('#color-change')) {
         animateElement(ELEMENTS.color.header, 'menu.close.colorChange')
     }
