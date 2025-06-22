@@ -17,14 +17,14 @@ a {
 body {
   background-color: var(--black);
 }
-body.version--pink {
+body.pink {
   background-color: var(--pink--light);
 
   .title--header {
     color: var(--white);
   }
 }
-body.version--white {
+body.white {
   background-color: var(--white);
 }
 

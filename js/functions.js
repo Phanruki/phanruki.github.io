@@ -5,8 +5,9 @@ import { keyframes, ELEMENTS } from "./const.js";
 function changeTheme(themeKey) {
     document.body.className = '';
 
-    if (THEMES[themeKey]) {
-        document.body.classList.add(THEMES[themeKey]);
+    console.log(themeKey)
+    if (themeKey) {
+        document.body.classList.add(themeKey);
     }
 }
 
