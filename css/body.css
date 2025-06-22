@@ -15,12 +15,13 @@
 
   background-color: var(--black--light);
 
+  z-index: 1;
+  gap: clamp(10px, 4dvh, 60px);
+
   > .container__main__titles {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    padding-bottom: clamp(10px, 4dvh, 44px);
   }
 
   > .container__main__social-icons {
@@ -29,8 +30,6 @@
     justify-content: center;
 
     gap: 20px;
-
-    padding-bottom: clamp(10px, 4dvh, 60px);
 
     .social-icon {
       background-image: var(--icon-url);
@@ -50,8 +49,6 @@
 
     justify-content: center;
     gap: 38px;
-
-    padding-bottom: clamp(10px, 4dvh, 40px);
   }
 }
 
@@ -78,7 +75,5 @@
 .main__profile-photo {
   display: flex;
 
-  width: clamp(200px, 36dvh, 430px);
-
-  padding-top: clamp(10px, 7dvh, 100px);
+  width: clamp(150px, 34dvh, 430px);
 }

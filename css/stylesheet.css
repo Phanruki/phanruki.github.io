@@ -59,7 +59,7 @@ body.version--white {
 
   font-family: "Poppins";
   font-weight: 600;
-  font-size: clamp(10px, 3dvw, 24px);
+  font-size: clamp(10px, 3dvh, 24px);
   line-height: 36px;
   letter-spacing: -0.06em;
   padding: 1%;
@@ -227,11 +227,6 @@ body.version--white {
   position: relative;
 
   bottom: 10px;
-  transform: translateY(50%);
-  /* 
-  top: 0%;
-  transform: translateY(-50%); */
-
-  transform: rotate(180deg);
+  transform: translateY(50%) rotate(180deg);
   left: 140px;
 }
