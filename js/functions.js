@@ -1,5 +1,6 @@
 export { changeTheme }
 import { keyframes, ELEMENTS, scrollState, SECTIONS } from "./const.js";
+import { DOM } from "./dom.js";
 
 // Change color function
 function changeTheme(themeKey) {
@@ -175,6 +176,80 @@ export async function changeSection(scrollDirection, animationType, animationTyp
                         } else {
                             animateElement(nextSectionElement, animationTypeReverse).onfinish = resolve;
                         }
+                    })
+                ]);
+
+                console.log(`Transition complete from ${scrollState.currentSection} to ${nextSection}`);
+            }
+
+            // Update section state
+            scrollState.currentSection = nextSection;
+            console.log('New current section:', scrollState.currentSection);
+
+        } finally {
+            console.log('Animation complete');
+            scrollState.isAnimating = false;
+        }
+    }
+}
+
+export async function selectedChangeSection(nextSection) {
+    const currentIndex = scrollState.sectionsOrder.indexOf(scrollState.currentSection);
+    let animationType, animationTypeReverse;
+
+    if (ELEMENTS.sizeWindow.matches && currentIndex === 1 && flag === 0) {
+        scrollState.currentSection = 'main'
+        if (nextSection !== 1) {
+            DOM.addClass(SECTIONS.about, 'hidden')
+        }
+        flag = 1
+    }
+
+    if (ELEMENTS.sizeWindow.matches) {
+        animationType = nextSection > currentIndex === true ? 'menu.changeX.hidden.up' : 'menu.changeX.hidden.down';
+        animationTypeReverse = nextSection > currentIndex === true ? 'menu.changeX.display.down' : 'menu.changeX.display.up';
+    }
+    if (!ELEMENTS.sizeWindow.matches) {
+        animationType = nextSection > currentIndex === true ? 'menu.change.hidden.up' : 'menu.change.hidden.down';
+        animationTypeReverse = nextSection > currentIndex === true ? 'menu.change.display.down' : 'menu.change.display.up';
+    }
+    console.log(nextSection)
+    nextSection = scrollState.sectionsOrder[nextSection]
+    if (nextSection !== scrollState.currentSection) {
+        console.log(nextSection)
+        console.log(`Changing section from ${scrollState.currentSection} to ${nextSection}`);
+        scrollState.isAnimating = true;
+
+        try {
+            const currentSectionElement = SECTIONS[scrollState.currentSection];
+            const nextSectionElement = SECTIONS[nextSection];
+
+            if (currentSectionElement && nextSectionElement) {
+                // Next secction visible outside the screen.
+                nextSectionElement.classList.remove('hidden');
+
+                // All animation at the same time.
+
+                await Promise.all([
+                    new Promise(resolve => {
+                        let animationOut = animateElement(currentSectionElement, animationType);
+                        console.log(currentSectionElement)
+                        if (scrollState.currentSection === 'main') {
+                            animationOut = animateElement(currentSectionElement, 'menu.changeX.hidden.main');
+                            console.log('hechp')
+                        }
+                        else {
+                            animationOut = animateElement(currentSectionElement, animationType);
+                        }
+
+                        animationOut.onfinish = () => {
+                            currentSectionElement.classList.add('hidden');
+                            resolve();
+                        };
+                    }),
+                    new Promise(resolve => {
+                        console.log(nextSection)
+                        animateElement(nextSectionElement, animationTypeReverse).onfinish = resolve;
                     })
                 ]);
 
