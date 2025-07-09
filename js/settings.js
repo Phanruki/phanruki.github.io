@@ -23,6 +23,7 @@ handleResponsiveChanges(ELEMENTS.sizeWindow);
 /* Change listener */
 
 ELEMENTS.sizeWindow.addEventListener("change", () => handleResponsiveChanges(ELEMENTS.sizeWindow));
+ELEMENTS.sizeWindow.addEventListener("change", () => window.location.reload());
 
 /* Menu display function */
 
