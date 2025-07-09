@@ -1,5 +1,5 @@
 export { changeTheme }
-import { keyframes, ELEMENTS } from "./const.js";
+import { keyframes, ELEMENTS, scrollState, SECTIONS } from "./const.js";
 
 // Change color function
 function changeTheme(themeKey) {
@@ -107,5 +107,87 @@ export const handleResponsiveChanges = debounce((mediaQuery) => {
     toggleResponsiveDisplay(mediaQuery, ELEMENTS.color.menu, 'menu');
     toggleResponsiveDisplay(mediaQuery, ELEMENTS.menu.header, 'menu', true);
     //Display body
-    toggleResponsiveDisplay(mediaQuery, ELEMENTS.container.body, null, true);
+    /* toggleResponsiveDisplay(mediaQuery, ELEMENTS.container.sub.container, null, true); */
 }, 500);
+
+let flag = 0
+export async function changeSection(scrollDirection, animationType, animationTypeReverse) {
+    let currentIndex = scrollState.sectionsOrder.indexOf(scrollState.currentSection);
+    let nextSection = scrollState.currentSection;
+
+    if (!ELEMENTS.sizeWindow.matches && currentIndex === 1 && scrollDirection === 'up') {
+        return
+    }
+    if (ELEMENTS.sizeWindow.matches && currentIndex === 1 && scrollDirection === 'down' && flag === 0) {
+        currentIndex = currentIndex - 1
+        console.log(currentIndex)
+        nextSection = scrollState.sectionsOrder.indexOf(currentIndex);
+        scrollState.currentSection = 'main'
+        flag = 1
+    }
+    console.log(currentIndex)
+    console.log(nextSection)
+
+    if (scrollDirection === 'down' && currentIndex < scrollState.sectionsOrder.length - 1) {
+        nextSection = scrollState.sectionsOrder[currentIndex + 1];
+        console.log(currentIndex, 'a')
+        console.log(nextSection)
+    } else if (scrollDirection === 'up' && currentIndex > 0) {
+        nextSection = scrollState.sectionsOrder[currentIndex - 1];
+    }
+
+    if (nextSection !== scrollState.currentSection) {
+        console.log(nextSection)
+        console.log(`Changing section from ${scrollState.currentSection} to ${nextSection}`);
+        scrollState.isAnimating = true;
+
+        try {
+            const currentSectionElement = SECTIONS[scrollState.currentSection];
+            const nextSectionElement = SECTIONS[nextSection];
+
+            if (currentSectionElement && nextSectionElement) {
+                // Next secction visible outside the screen.
+                nextSectionElement.classList.remove('hidden');
+
+                // All animation at the same time.
+                await Promise.all([
+                    new Promise(resolve => {
+                        let animationOut = animateElement(currentSectionElement, animationType);
+                        console.log(currentSectionElement)
+                        if (scrollState.currentSection === 'main') {
+                            animationOut = animateElement(currentSectionElement, 'menu.changeX.hidden.main');
+                            console.log('hechp')
+                        }
+                        else {
+                            animationOut = animateElement(currentSectionElement, animationType);
+                        }
+
+                        animationOut.onfinish = () => {
+                            currentSectionElement.classList.add('hidden');
+                            resolve();
+                        };
+                    }),
+                    new Promise(resolve => {
+                        console.log(nextSection)
+                        if (scrollState.currentSection === 'about' && nextSection === 'main') {
+                            animateElement(nextSectionElement, 'menu.changeX.display.main').onfinish = resolve;
+                            console.log('bbbb')
+                        } else {
+                            animateElement(nextSectionElement, animationTypeReverse).onfinish = resolve;
+                        }
+                    })
+                ]);
+
+                console.log(`Transition complete from ${scrollState.currentSection} to ${nextSection}`);
+            }
+
+            // Update section state
+            scrollState.currentSection = nextSection;
+            console.log('New current section:', scrollState.currentSection);
+
+        } finally {
+            console.log('Animation complete');
+            scrollState.isAnimating = false;
+        }
+    }
+}

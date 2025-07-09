@@ -16,6 +16,9 @@ a {
 
 body {
   background-color: var(--black);
+  margin: 0;
+  overflow: hidden;
+  height: 1000vh;
 }
 body.pink {
   background-color: var(--pink--light);
@@ -29,6 +32,8 @@ body.white {
 }
 
 :root {
+  scroll-behavior: smooth;
+
   /* Pink theme */
   --pink--light: #fff5fc;
   --pink--black: #191718;
@@ -65,6 +70,12 @@ body.white {
   padding: 1%;
 }
 
+@media (max-width: 1134px) {
+  .title--header {
+    font-size: clamp(10px, 2.4dvw, 24px);
+  }
+}
+
 .title--sub {
   /* Its the subtitle for title. */
 
@@ -85,6 +96,44 @@ body.white {
   letter-spacing: -0.06em;
 
   text-align: center;
+}
+
+.title--large--sub--sub {
+  /* It's the second and final subtitle for large titles. */
+
+  font-family: "Pridi";
+  font-style: normal;
+  font-weight: 600;
+  font-size: clamp(22px, 4dvh, 40px);
+  line-height: 62px;
+  letter-spacing: -0.06em;
+
+  color: var(--black);
+}
+
+.paragraph--large {
+  /* The paragraphs in large version. */
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: clamp(10px, 2.5dvh, 24px);
+  line-height: 42px;
+  letter-spacing: -0.06em;
+
+  color: var(--white);
+}
+
+.paragraph {
+  /* This is used for the description of many stuff. */
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(8px, 2dvh, 20px);
+  line-height: 35px;
+  letter-spacing: -0.06em;
+
+  color: var(--white);
 }
 
 /* Config classes */
@@ -126,14 +175,14 @@ body.white {
   justify-content: flex-start;
   flex-direction: column;
 
-  position: absolute;
+  position: fixed;
 
   top: 50%;
   transform: translateY(-50%);
 
   left: -140px;
 
-  gap: clamp(10px, 5dvh, 50px);
+  gap: clamp(10px, 2dvh, 50px);
 
   > .header__row__text {
     display: flex;
@@ -196,6 +245,8 @@ body.white {
   background-color: var(--white);
   border-radius: 50px;
 }
+
+/* Menu section */
 
 .menu {
   position: relative;

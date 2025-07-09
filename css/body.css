@@ -16,7 +16,7 @@
   background-color: var(--black--light);
 
   z-index: 1;
-  gap: clamp(10px, 4dvh, 60px);
+  gap: clamp(10px, 3.2dvh, 60px);
 
   > .container__main__titles {
     display: flex;
@@ -30,15 +30,6 @@
     justify-content: center;
 
     gap: 20px;
-
-    .social-icon {
-      background-image: var(--icon-url);
-      background-size: contain;
-      background-repeat: no-repeat;
-
-      min-height: clamp(20px, 10.9091px + 2.8409vw, 40px);
-      min-width: clamp(20px, 10.9091px + 2.8409vw, 40px);
-    }
   }
 
   > .container__main__buttons {
@@ -54,6 +45,7 @@
 
 #container__sub {
   display: flex;
+  flex-direction: column;
   position: fixed;
 
   width: 52dvw;
@@ -66,14 +58,213 @@
   background-color: var(--black--light--dark);
 }
 
-.container__main--center {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 .main__profile-photo {
   display: flex;
 
   width: clamp(150px, 34dvh, 430px);
+}
+
+.about-me__description__main {
+  display: flex;
+  flex-direction: column;
+
+  text-align: justify;
+
+  > div:first-child {
+    display: flex;
+    gap: 38px;
+
+    flex-direction: row;
+    align-items: flex-end;
+
+    > p:first-child {
+      color: var(--white);
+    }
+
+    > p:last-child {
+      color: var(--black--text);
+    }
+  }
+
+  > div:last-child {
+    display: flex;
+    gap: clamp(12px, 2dvw, 42px);
+
+    flex-direction: column;
+  }
+}
+
+.about-me__description__sub {
+  display: flex;
+  flex-direction: row;
+
+  gap: clamp(20px, 7.5dvw, 245px);
+
+  > div > div > p:last-child {
+    color: var(--black--text);
+  }
+}
+
+#about-me__description {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  width: 52dvw;
+
+  gap: clamp(10px, 2dvw, 58px);
+  padding: 0 2dvh;
+}
+
+#about-me__extra {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  width: 52dvw;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    text-align: justify;
+
+    width: 42dvw;
+    padding: clamp(10px, 1dvw, 58px) 0;
+    gap: 20px;
+
+    > div > p:first-child {
+      text-align: center;
+
+      color: var(--white);
+    }
+  }
+}
+
+#programming-skills {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  color: var(--white);
+
+  width: 52dvw;
+  padding-top: clamp(10px, 8dvh, 70px);
+
+  .programming-skills--icons {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-around;
+  }
+}
+
+#education {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  color: var(--white);
+
+  width: 52dvw;
+  padding-top: clamp(10px, 8dvh, 70px);
+  gap: clamp(10px, 4dvh, 58px);
+
+  > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: var(--black--light);
+
+    border: 1.5px dashed #000;
+
+    width: clamp(200px, 30dvw, 400px);
+    gap: 1dvh;
+
+    > p:nth-child(2) {
+      color: var(--black--light--dark);
+    }
+  }
+}
+
+#contact {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  color: var(--white);
+
+  width: 52dvw;
+  height: 86dvh;
+  justify-content: space-evenly;
+  padding: clamp(10px, 5dvh, 70px) 0;
+
+  gap: 80px;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(40px, -108.2353px + 13.0719vw, 80px);
+
+    div {
+      display: flex;
+      gap: clamp(20px, -54.1176px + 6.5359vw, 40px);
+    }
+  }
+}
+
+.about-me__extra--icons {
+  display: flex;
+  flex-direction: row;
+
+  gap: 52px;
+}
+
+/* Icons */
+
+.social-icon {
+  background-color: var(--black);
+  -webkit-mask: var(--icon-url) no-repeat center;
+  mask: var(--icon-url) no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+
+  min-height: clamp(20px, 10.9091px + 2.8409dvw, 40px);
+  min-width: clamp(20px, 10.9091px + 2.8409dvw, 40px);
+}
+
+.extra-icon {
+  background-image: var(--icon-url);
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  min-height: clamp(40px, 4.2dvw, 100px);
+  min-width: clamp(40px, 4.2dvw, 100px);
+}
+
+.skills-icon {
+  background-image: var(--icon-url);
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  min-height: clamp(40px, 6.2dvw, 106px);
+  min-width: clamp(40px, 6.2dvw, 106px);
+}
+
+.social-icon--big {
+  background-color: var(--white);
+  -webkit-mask: var(--icon-url) no-repeat center;
+  mask: var(--icon-url) no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+
+  min-height: clamp(40px, -137.8824px + 15.6863vw, 88px);
+  min-width: clamp(40px, -137.8824px + 15.6863vw, 88px);
 }

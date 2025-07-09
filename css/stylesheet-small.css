@@ -9,6 +9,7 @@
     gap: 0;
 
     transform: none;
+    top: 0%;
 
     > .header__row__text {
       width: -webkit-fill-available;
@@ -18,7 +19,7 @@
 
       > .header__row__background {
         min-height: clamp(30px, 8dvh, 99px);
-        min-width: clamp(300px, 85dvw, 749px);
+        min-width: clamp(300px, 85dvw, 840px);
 
         border-radius: 50px;
       }
@@ -29,7 +30,8 @@
       flex-direction: row;
 
       top: 18dvh;
-      right: clamp(-58px, -28px - 2.8409vw, -34px);
+      right: clamp(-58px, -28px - 2.8409dvw, 34px);
+      z-index: 2;
 
       > #color-change {
         background-color: var(--black--light);
@@ -37,6 +39,114 @@
 
         flex-direction: column;
       }
+    }
+  }
+
+  #container__main {
+    width: 86dvw;
+    height: 80dvh;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+  }
+
+  #container__sub {
+    width: 86dvw;
+    height: 80dvh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    #about-me__description {
+      width: 86dvw;
+      height: max-content;
+
+      > .about-me__description__main {
+        > div:first-child {
+          display: unset;
+        }
+      }
+      > .about-me__description__sub {
+        display: unset;
+      }
+    }
+
+    #about-me__extra {
+      display: flex;
+      width: 86dvw;
+
+      > div {
+        width: auto;
+
+        padding: clamp(10px, 1dvw, 58px);
+      }
+
+      > div > div > p:nth-child(2) {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 400;
+        font-size: clamp(8px, 2dvh, 20px);
+        line-height: 35px;
+        letter-spacing: -0.06em;
+
+        color: var(--white);
+      }
+
+      .about-me__extra--icons {
+        flex-wrap: wrap;
+      }
+    }
+
+    #programming-skills {
+      display: flex;
+      width: 86dvw;
+
+      overflow: hidden;
+    }
+
+    #education {
+      display: flex;
+      width: 86dvw;
+    }
+
+    #portfolio {
+      position: absolute;
+
+      display: flex;
+      width: 86dvw;
+    }
+
+    #contact {
+      display: flex;
+      width: 86dvw;
+
+      text-align: center;
+      gap: 40px;
+
+      > a {
+        width: 80dvw;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .main__profile-photo {
+    width: clamp(150px, 26dvh, 430px);
+  }
+
+  @media (max-width: 426px) {
+    #container__main {
+      width: 86dvw;
+      height: 80dvh;
+      transform: translate(-50%, -35%);
+    }
+
+    .main__profile-photo {
+      width: clamp(120px, 34dvw, 430px);
     }
   }
 }
