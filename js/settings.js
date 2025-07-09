@@ -1,4 +1,4 @@
-import { changeTheme, animateElement, handleResponsiveChanges, changeSection } from "./functions.js";
+import { changeTheme, animateElement, handleResponsiveChanges, changeSection, selectedChangeSection } from "./functions.js";
 import { ELEMENTS, scrollState, SECTIONS } from "./const.js";
 import { DOM } from "./dom.js";
 
@@ -55,7 +55,12 @@ document.addEventListener('click', (event) => {
             return
         }
 
-        if (event.target.closest('#header--about-me')) {
+        if (event.target.closest('#header--about-me__description')
+            || event.target.closest('#header--about-me__extra')
+            || event.target.closest('#header--programming-skills')
+            || event.target.closest('#header--education')
+            || event.target.closest('#header--portfolio')
+            || event.target.closest('#header--contact')) {
             animateElement(ELEMENTS.menu.row, 'menu.close.headerRow')
             animateElement(ELEMENTS.container.main, 'menu.close.containerMain')
             DOM.removeClass(ELEMENTS.container.sub.container, 'hidden')
@@ -63,6 +68,53 @@ document.addEventListener('click', (event) => {
 
             flag = 0;
         }
+
+
+    }
+
+    const element = event.target.closest(
+        '#header--about-me__description, ' +
+        '#header--about-me__extra, ' +
+        '#header--programming-skills, ' +
+        '#header--education, ' +
+        '#header--portfolio, ' +
+        '#header--contact'
+    );
+
+    switch (element?.id) {
+        case 'header--about-me__description':
+            console.log('about-me description')
+            selectedChangeSection(1)
+            break;
+
+        case 'header--about-me__extra':
+            console.log('about-me extra')
+            selectedChangeSection(2)
+            break;
+
+        case 'header--programming-skills':
+            console.log('programming skills')
+            selectedChangeSection(3)
+            break;
+
+        case 'header--education':
+            console.log('education')
+            selectedChangeSection(4)
+            break;
+
+        case 'header--portfolio':  // Note: Typo? Should it be 'portfolio'?
+            console.log('portfolio')
+            selectedChangeSection(5)
+            break;
+
+        case 'header--contact':
+            console.log('contact')
+            selectedChangeSection(6)
+            break;
+
+        default:
+            console.log('aaaaaa')
+            break;
     }
 })
 
